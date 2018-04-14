@@ -21,8 +21,8 @@ public class SecurityService implements ISecurityService {
     @Override
     public String findLoggedInUsername() {
         Object userDetails = SecurityContextHolder.getContext().getAuthentication().getDetails();
-        if (userDetails instanceof User) {
-            User user = (User) userDetails;
+        if (userDetails instanceof UserDetails) {
+            UserDetails user = (UserDetails) userDetails;
             return user.getUsername();
         }
 
@@ -39,7 +39,7 @@ public class SecurityService implements ISecurityService {
 
         authenticationManager.authenticate(token);
 
-        if(token.isAuthenticated()){
+        if (token.isAuthenticated()) {
             SecurityContextHolder.getContext().setAuthentication(token);
             Logger.getLogger(getClass().getName()).info("User logged in.");
         }
