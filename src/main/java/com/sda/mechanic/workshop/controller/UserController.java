@@ -19,7 +19,6 @@ public class UserController {
 
     @RequestMapping(path = "/login", method = RequestMethod.GET)
     public String loginUser(Model model){
-
         model.addAttribute("zmienna", "wartosc");
         return "login";
     }

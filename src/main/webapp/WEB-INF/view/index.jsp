@@ -1,14 +1,10 @@
 <!DOCTYPE html>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<html lang="en">
-<body>
-<div>
-    <div>
-        <h1>Spring Boot JSP Example</h1>
-        <h2>Hello ${message}</h2>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@include file="header.jsp" %>
 
-        Click on this <strong><a href="next">link</a></strong> to visit another page.
-    </div>
+<div style="margin-top:100px" class="row">
+    Witaj
 </div>
-</body>
-</html>
+
+<%@include file="footer.jsp" %>
