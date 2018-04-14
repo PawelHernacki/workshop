@@ -24,6 +24,6 @@ public class Car {
     @ManyToOne(cascade = CascadeType.ALL)
     private User owner;
 
-    @OneToMany(mappedBy = "car")
+    @OneToMany
     private List<ServiceOrder> orders;
 }

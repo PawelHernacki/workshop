@@ -19,7 +19,7 @@ public class User {
     private String username;
     private String password;
 
-    @ManyToMany(mappedBy = "userList")
+    @ManyToMany
     private Set<Role> role;
 
     @OneToMany
