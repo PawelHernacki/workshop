@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@include file="header.jsp" %>
 
 <div style="margin-top:100px" class="row">
     <div class="col-md-8">
-        <form action="/user/register" modelAttribute="userForm" class="form-signin" method="post">
+        <form:form action="/user/register" modelAttribute="userForm" class="form-signin" method="post">
             <div class="row">
                 <div class="col-md-5">
                     Login:
                 </div>
                 <div class="col-md-5">
-                    <input type="text" class="form-control" name="username"/>
+                    <spring:bind path="username">
+                        <form:input path="username" type="text" class="form-control" name="username"/>
+                    </spring:bind>
                 </div>
             </div>
             <div class="row">
@@ -19,7 +22,9 @@
                     Password:
                 </div>
                 <div class="col-md-5">
-                    <input type="password" class="form-control" name="password"/>
+                    <spring:bind path="password">
+                        <form:input path="password" type="password" class="form-control" name="password"/>
+                    </spring:bind>
                 </div>
             </div>
             <%--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
@@ -28,7 +33,7 @@
                     <input class="form-control" type="submit"/>
                 </div>
             </div>
-        </form>
+        </form:form>
     </div>
 </div>
 
