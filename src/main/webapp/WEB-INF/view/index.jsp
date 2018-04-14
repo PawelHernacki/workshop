@@ -4,6 +4,11 @@
 <%@include file="header.jsp" %>
 
 <div style="margin:100px;" class="row">
+    <%
+
+    %>
+    ${jakas_nazwa}
+    ${jakas_nazwa2}
     Witaj
 </div>
 

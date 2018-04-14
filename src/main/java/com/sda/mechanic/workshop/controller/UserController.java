@@ -1,7 +1,12 @@
 package com.sda.mechanic.workshop.controller;
 
+import com.sda.mechanic.workshop.model.Role;
 import com.sda.mechanic.workshop.model.User;
+import com.sda.mechanic.workshop.repository.RoleRepository;
+import com.sda.mechanic.workshop.service.IUserService;
+import com.sda.mechanic.workshop.service.UserService;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -10,11 +15,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 import java.util.logging.Logger;
 
 @Controller
 @RequestMapping(path = "/user/")
 public class UserController {
+
+    @Autowired
+    private RoleRepository roleRepository;
+
+    @Autowired
+    private IUserService userService;
 
     @RequestMapping(path = "/add", method = RequestMethod.GET)
     public String addUserForm(Model model) {
@@ -35,7 +49,25 @@ public class UserController {
     public String registerForm(@ModelAttribute("userForm") User user, Model model) {
         LoggerFactory.getLogger(getClass().getName()).info("Register: " + user);
 
-        return "index";
+        Optional<Role> basicRole = roleRepository.findByName("USER");
+        Role role;
+        if (!basicRole.isPresent()) {
+            // tylko na początku, w przypadku gdy nie mamy tej roli jeszcze dodanej
+            role = new Role();
+            role.setName("USER");
+
+            role = roleRepository.save(role);
+        } else {
+            role = basicRole.get();
+        }
+
+        Set<Role> roles = new HashSet<>();
+        roles.add(role);
+        user.setRole(roles);
+
+        userService.registerUser(user);
+
+        return "redirect:/user/login";
     }
 
     @RequestMapping(path = "/login", method = RequestMethod.GET)
