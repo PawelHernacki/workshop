@@ -1,5 +1,6 @@
 package com.sda.mechanic.workshop.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,6 +26,7 @@ public class User {
     private Set<Role> role;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Car> carList;
 
 }

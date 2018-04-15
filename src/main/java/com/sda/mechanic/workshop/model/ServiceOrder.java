@@ -21,4 +21,14 @@ public class ServiceOrder {
 
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Car car;
+
+    @Override
+    public String toString() {
+        return "ServiceOrder{" +
+                "id=" + id +
+                ", dateSubmitted=" + dateSubmitted +
+                ", description='" + description + '\'' +
+                ", completed=" + completed +
+                '}';
+    }
 }

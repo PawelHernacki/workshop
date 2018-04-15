@@ -29,7 +29,7 @@ public class OrderController {
 
     @RequestMapping(path = "/add", method = RequestMethod.POST)
     public String addOrder(@ModelAttribute("orderForm") ServiceOrder order, Model model) {
-        LoggerFactory.getLogger(getClass().getName()).info("Order: " + order);
+//        LoggerFactory.getLogger(getClass().getName()).info("Order: " + order);
 
         orderService.addOrder(order);
 

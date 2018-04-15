@@ -11,6 +11,9 @@
                 </spring:bind>
             </div>
         </div>
+        <spring:bind path="car">
+            <form:hidden path="car" name="car"></form:hidden>
+        </spring:bind>
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4">

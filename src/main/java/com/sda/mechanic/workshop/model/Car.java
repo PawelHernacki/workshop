@@ -1,5 +1,7 @@
 package com.sda.mechanic.workshop.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -24,6 +26,18 @@ public class Car {
     @ManyToOne(cascade = CascadeType.PERSIST)
     private User owner;
 
-    @OneToMany
+    @OneToMany(mappedBy = "car")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<ServiceOrder> orders;
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "id=" + id +
+                ", registrationNumber='" + registrationNumber + '\'' +
+                ", make='" + make + '\'' +
+                ", model='" + model + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }
