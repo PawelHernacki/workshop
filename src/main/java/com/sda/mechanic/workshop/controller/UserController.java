@@ -4,6 +4,7 @@ import com.sda.mechanic.workshop.model.Role;
 import com.sda.mechanic.workshop.model.User;
 import com.sda.mechanic.workshop.repository.RoleRepository;
 import com.sda.mechanic.workshop.service.IUserService;
+import com.sda.mechanic.workshop.service.SecurityService;
 import com.sda.mechanic.workshop.service.UserService;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,9 @@ public class UserController {
 
     @Autowired
     private IUserService userService;
+
+    @Autowired
+    private SecurityService securityService;
 
     @RequestMapping(path = "/add", method = RequestMethod.GET)
     public String addUserForm(Model model) {
@@ -67,12 +71,15 @@ public class UserController {
 
         userService.registerUser(user);
 
-        return "redirect:/user/login";
+        securityService.autologin(user.getUsername(), user.getPassword());
+
+        return "redirect:/";
     }
 
     @RequestMapping(path = "/login", method = RequestMethod.GET)
     public String loginUser(Model model) {
         model.addAttribute("zmienna", "wartosc");
+
         return "login";
     }
 }

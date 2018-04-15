@@ -15,7 +15,8 @@ public class UserService implements IUserService {
     @Autowired
     private BCryptPasswordEncoder encoder;
 
-    public void registerUser(User user) {
+    public void registerUser(User user) throws UsernameAlreadyExistsException {
+
         user.setPassword(encoder.encode(user.getPassword()));
         
         userRepository.save(user);
