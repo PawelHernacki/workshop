@@ -24,7 +24,7 @@ public class User {
     @ManyToMany(fetch =  FetchType.EAGER)
     private Set<Role> role;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
     private List<Car> carList;
 
 }

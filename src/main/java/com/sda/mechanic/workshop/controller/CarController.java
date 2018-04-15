@@ -53,10 +53,16 @@ public class CarController {
 
     @RequestMapping(path = "/add", method = RequestMethod.POST)
     public String submitCar(@ModelAttribute("carForm") Car car, Model model) {
+        Optional<User> userOptional = securityService.getLoggedInUser();
 
-        carService.addNewCar(car);
+        if (userOptional.isPresent()) {
+            car.setOwner(userOptional.get());
+            carService.addNewCar(car);
 
-        return "redirect:/car/";
+            return "redirect:/car/";
+        }
+
+        return "redirect:/user/login";
     }
 
 }
