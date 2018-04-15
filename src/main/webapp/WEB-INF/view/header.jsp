@@ -17,7 +17,10 @@
                     <a class="nav-link" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/user/listusers">Users</a>
+                    <a class="nav-link" href="/admin/listusers">Users</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/car/">Cars</a>
                 </li>
             </ul>
             <nav class="my-2 my-md-0 mr-md-3">

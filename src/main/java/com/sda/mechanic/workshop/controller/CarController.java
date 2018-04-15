@@ -2,12 +2,14 @@ package com.sda.mechanic.workshop.controller;
 
 import com.sda.mechanic.workshop.model.Car;
 import com.sda.mechanic.workshop.model.User;
+import com.sda.mechanic.workshop.service.ICarService;
 import com.sda.mechanic.workshop.service.IUserService;
 import com.sda.mechanic.workshop.service.SecurityService;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -23,14 +25,13 @@ public class CarController {
     @Autowired
     private IUserService userService;
 
+    @Autowired
+    private ICarService carService;
+
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public String cars(Model model) {
-        // ladujemy z context'u zalogowanego uzytkownika
-        String loggedInUsername = securityService.findLoggedInUsername();
+        Optional<User> userOptional = securityService.getLoggedInUser();
 
-        LoggerFactory.getLogger(getClass().getName()).info("Found logged in user: " + loggedInUsername);
-        // szukamy uzytkownika w bazie
-        Optional<User> userOptional = userService.findUserByUsername(loggedInUsername);
         // jesli znajdziemy uzytkownika w bazie
         if (userOptional.isPresent()) {
             User user = userOptional.get();
@@ -51,7 +52,9 @@ public class CarController {
     }
 
     @RequestMapping(path = "/add", method = RequestMethod.POST)
-    public String submitCar(Model model) {
+    public String submitCar(@ModelAttribute("carForm") Car car, Model model) {
+
+        carService.addNewCar(car);
 
         return "redirect:/car/";
     }
