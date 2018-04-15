@@ -3,6 +3,7 @@ package com.sda.mechanic.workshop.controller;
 import com.sda.mechanic.workshop.exceptions.UsernameAlreadyExistsException;
 import com.sda.mechanic.workshop.model.Role;
 import com.sda.mechanic.workshop.model.User;
+import com.sda.mechanic.workshop.model.dto.UserInfoDto;
 import com.sda.mechanic.workshop.repository.RoleRepository;
 import com.sda.mechanic.workshop.service.IUserService;
 import com.sda.mechanic.workshop.service.SecurityService;
@@ -18,9 +19,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.logging.Logger;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping(path = "/user/")
@@ -91,5 +95,17 @@ public class UserController {
         model.addAttribute("zmienna", "wartosc");
 
         return "login";
+    }
+
+    @RequestMapping(path = "/listUsers", method = RequestMethod.GET)
+    public String listUsers(Model model) {
+        List<User> userList = userService.getAllUsers();
+        List<UserInfoDto> userInfoDtos = userList.stream()
+                .map(user -> new UserInfoDto(user.getId(), user.getUsername(), user.getRole()))
+                .collect(Collectors.toList());
+
+        model.addAttribute("user_list", userInfoDtos);
+
+        return "listusers";
     }
 }

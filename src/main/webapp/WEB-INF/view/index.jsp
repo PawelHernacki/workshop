@@ -3,13 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="header.jsp" %>
 
-<div style="margin:100px;" class="row">
-    <%
-
-    %>
-    ${jakas_nazwa}
-    ${jakas_nazwa2}
-    Witaj
-</div>
+${jakas_nazwa}
+${jakas_nazwa2}
+Witaj
 
 <%@include file="footer.jsp" %>
