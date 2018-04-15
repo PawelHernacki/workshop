@@ -1,7 +1,9 @@
 package com.sda.mechanic.workshop.controller;
 
+import com.sda.mechanic.workshop.model.ServiceOrder;
 import com.sda.mechanic.workshop.model.User;
 import com.sda.mechanic.workshop.model.dto.UserInfoDto;
+import com.sda.mechanic.workshop.service.IOrderService;
 import com.sda.mechanic.workshop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,9 @@ public class AdminController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private IOrderService orderService;
+
     @RequestMapping(path = "/listusers", method = RequestMethod.GET)
     public String listUsers(Model model) {
         List<User> userList = userService.getAllUsers();
@@ -28,5 +33,14 @@ public class AdminController {
         model.addAttribute("user_list", userInfoDtos);
 
         return "listusers";
+    }
+
+    @RequestMapping(path = "/listorders", method = RequestMethod.GET)
+    public String list(Model model) {
+        List<ServiceOrder> orders = orderService.getAll();
+
+        model.addAttribute("orders_list", orders);
+
+        return "orderlist";
     }
 }

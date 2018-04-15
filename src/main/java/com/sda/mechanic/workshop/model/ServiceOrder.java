@@ -19,6 +19,6 @@ public class ServiceOrder {
     private String description;
     private boolean completed;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Car car;
 }

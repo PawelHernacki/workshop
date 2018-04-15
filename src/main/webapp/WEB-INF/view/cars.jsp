@@ -13,7 +13,7 @@
             <div class="col-md-2">${car.make}, ${car.model}</div>
             <div class="col-md-5">${car.description}</div>
             <div class="col-md-2">
-                <a class="icon-button" role="button" href="/order/add">
+                <a class="icon-button" role="button" href="/order/add?carid=${car.id}">
                     <i class="fas fa-paper-plane fa-2x"></i>
                 </a>
                 <a class="icon-button" role="button" href="/car/remove?carid=${car.id}">
@@ -21,7 +21,6 @@
                 </a>
             </div>
         </div>
-        <hr>
     </c:forEach>
 </div>
 
