@@ -1,5 +1,6 @@
 package com.sda.mechanic.workshop.controller;
 
+import com.sda.mechanic.workshop.exceptions.UsernameAlreadyExistsException;
 import com.sda.mechanic.workshop.model.Role;
 import com.sda.mechanic.workshop.model.User;
 import com.sda.mechanic.workshop.repository.RoleRepository;
@@ -45,6 +46,7 @@ public class UserController {
         LoggerFactory.getLogger(getClass().getName()).info("Register: ");
 
         model.addAttribute("userForm", new User());
+        model.addAttribute("error", false);
 
         return "register";
     }
@@ -69,7 +71,15 @@ public class UserController {
         roles.add(role);
         user.setRole(roles);
 
-        userService.registerUser(user);
+        try {
+            userService.registerUser(user);
+        } catch (UsernameAlreadyExistsException e) {
+            model.addAttribute("userForm", user);
+
+            model.addAttribute("error", true);
+            model.addAttribute("error_message", "Username already exists!");
+            return "register";
+        }
 
         securityService.autologin(user.getUsername(), user.getPassword());
 

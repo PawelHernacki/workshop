@@ -27,6 +27,16 @@
                     </spring:bind>
                 </div>
             </div>
+            <c:if test="${error}">
+                <div class="row">
+                    <div class="col-md-5">
+                        ERROR!
+                    </div>
+                    <div class="col-md-5 alert alert-danger">
+                            ${error_message}
+                    </div>
+                </div>
+            </c:if>
             <%--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
             <div class="row">
                 <div class="col-md-3">
