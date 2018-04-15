@@ -7,12 +7,19 @@
     </a>
     <hr>
     <c:forEach items="${user_cars}" var="car">
-        <div class="row">
+        <div class="row row-line">
             <div class="col-md-1">${car.id}</div>
             <div class="col-md-2">${car.registrationNumber}</div>
             <div class="col-md-2">${car.make}, ${car.model}</div>
             <div class="col-md-5">${car.description}</div>
-            <div class="col-md-2"></div>
+            <div class="col-md-2">
+                <a class="icon-button" role="button" href="/order/add">
+                    <i class="fas fa-paper-plane fa-2x"></i>
+                </a>
+                <a class="icon-button" role="button" href="/car/remove?carid=${car.id}">
+                    <i class="far fa-trash-alt fa-2x"></i>
+                </a>
+            </div>
         </div>
         <hr>
     </c:forEach>

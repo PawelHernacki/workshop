@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Optional;
 
@@ -63,6 +64,33 @@ public class CarController {
         }
 
         return "redirect:/user/login";
+    }
+
+    @RequestMapping(path = "/remove", method = RequestMethod.GET)
+    public String remove(@RequestParam("carid") Long carId) {
+        Optional<User> userOptional = securityService.getLoggedInUser();
+        LoggerFactory.getLogger(getClass().getName()).info("Removing: " + carId);
+        if (!userOptional.isPresent()) {
+            return "redirect:/user/login";
+        } else {
+            User user = userOptional.get();
+
+            Optional<Car> carOptional = carService.getCarWithId(carId);
+            if (!carOptional.isPresent()) {
+                return "redirect:/error/denied";
+            } else {
+                Car car = carOptional.get();
+
+                if (car.getOwner() == user) {
+                    carService.remove(car);
+                } else {
+                    return "redirect:/error/denied";
+                }
+            }
+        }
+
+
+        return "redirect:/car/";
     }
 
 }

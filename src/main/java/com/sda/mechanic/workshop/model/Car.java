@@ -21,7 +21,7 @@ public class Car {
 
     private String description;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private User owner;
 
     @OneToMany

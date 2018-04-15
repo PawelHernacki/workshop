@@ -1,5 +1,11 @@
-.black{
-    border: 5px solid #000;
-    background-color: #000;
-    color: #000;
+.row-line:nth-child(even) {
+    background-color: azure;
+}
+
+.row-line:nth-child(odd) {
+    background-color: beige;
+}
+.icon-button{
+    min-height: 30px;
+    min-width: 30px;
 }

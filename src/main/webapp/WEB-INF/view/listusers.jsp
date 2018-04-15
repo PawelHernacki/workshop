@@ -2,7 +2,7 @@
 
 <div class="container">
     <c:forEach items="${user_list}" var="user">
-        <div class="row">
+        <div class="row row-line">
             <div class="col-md-2">
                     ${user.identifier}
             </div>
