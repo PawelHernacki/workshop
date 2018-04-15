@@ -5,17 +5,19 @@ import com.sda.mechanic.workshop.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
-public class OrderService implements IOrderService{
+public class OrderService implements IOrderService {
 
     @Autowired
     private OrderRepository orderRepository;
 
-
     @Override
     public void addOrder(ServiceOrder order) {
+        order.setDateSubmitted(LocalDate.now());
+
         orderRepository.save(order);
     }
 

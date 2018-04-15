@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js"
+            integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+"
+            crossorigin="anonymous"></script>
 
 </head>
 <body>
@@ -23,9 +25,14 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="/">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/admin/listusers">Users</a>
-                </li>
+                <c:if test="${pageContext.request.isUserInRole('ADMIN')}">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/listusers">Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/listorders">Orders</a>
+                    </li>
+                </c:if>
                 <li class="nav-item">
                     <a class="nav-link" href="/car/">Cars</a>
                 </li>
