@@ -1,5 +1,6 @@
 package com.sda.mechanic.workshop.service;
 
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,12 +22,15 @@ public class SecurityService implements ISecurityService {
 
     @Override
     public String findLoggedInUsername() {
-        Object userDetails = SecurityContextHolder.getContext().getAuthentication().getDetails();
+        Object userDetails = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        LoggerFactory.getLogger(getClass().getName()).info("User search: " + userDetails);
         if (userDetails instanceof UserDetails) {
+//            LoggerFactory.getLogger(getClass().getName()).info("User proper type.");
             UserDetails user = (UserDetails) userDetails;
             return user.getUsername();
         }
 
+//        LoggerFactory.getLogger(getClass().getName()).info("Username type not valid.");
         return null;
     }
 
