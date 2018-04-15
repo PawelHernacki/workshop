@@ -7,7 +7,6 @@
 <body>
 <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="#">Carousel</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -15,19 +14,34 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
+                    <a class="nav-link" href="/user/listusers">Users</a>
                 </li>
             </ul>
-            <form class="form-inline mt-2 mt-md-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
+            <nav class="my-2 my-md-0 mr-md-3">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/user/register">Register</a>
+                    </li>
+                    <c:choose>
+                        <c:when test="${pageContext.request.userPrincipal.name == null}">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/user/login">Login</a>
+                            </li>
+                        </c:when>
+                        <c:when test="${pageContext.request.userPrincipal.name != null}">
+                            <li class="nav-item active">
+                                <form id="logoutForm" method="POST" action="/logout">
+                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                                </form>
+                                <a class="nav-link" onclick="document.forms['logoutForm'].submit()">Logout</a>
+                            </li>
+                        </c:when>
+                    </c:choose>
+                </ul>
+            </nav>
         </div>
     </nav>
 </header>

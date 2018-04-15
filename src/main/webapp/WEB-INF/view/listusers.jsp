@@ -15,7 +15,7 @@
             <div class="col-md-5">
                 <div>
                     <c:forEach items="${user.setOfRoles}" var="role">
-                        [${role}]
+                        [${role.name}]
                     </c:forEach>
                 </div>
             </div>

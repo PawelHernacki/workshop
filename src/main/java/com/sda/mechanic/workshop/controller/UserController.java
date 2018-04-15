@@ -96,16 +96,4 @@ public class UserController {
 
         return "login";
     }
-
-    @RequestMapping(path = "/listUsers", method = RequestMethod.GET)
-    public String listUsers(Model model) {
-        List<User> userList = userService.getAllUsers();
-        List<UserInfoDto> userInfoDtos = userList.stream()
-                .map(user -> new UserInfoDto(user.getId(), user.getUsername(), user.getRole()))
-                .collect(Collectors.toList());
-
-        model.addAttribute("user_list", userInfoDtos);
-
-        return "listusers";
-    }
 }
