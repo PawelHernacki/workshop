@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="header.jsp" %>
 
 
@@ -8,6 +5,7 @@
     <a class="btn btn-primary" role="button" href="/car/add">
         Add Car
     </a>
+    <hr>
     <c:forEach items="${user_cars}" var="car">
         <div class="row">
             <div class="col-md-1">${car.id}</div>
@@ -16,6 +14,7 @@
             <div class="col-md-5">${car.description}</div>
             <div class="col-md-2"></div>
         </div>
+        <hr>
     </c:forEach>
 </div>
 

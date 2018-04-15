@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="header.jsp" %>
 
 <div style="margin-top:100px" class="row">
-    <div class="col-md-8">
+    <div class="col-md-8 black" >
         <form action="/user/login" class="form-signin" method="post">
             <div class="row">
                 <div class="col-md-5">
